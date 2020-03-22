@@ -4,9 +4,22 @@ namespace UserInput;
 
 class UserInput
 {
+	/**
+	 * @var string
+	 */
 	protected $function;
+
+	/**
+	 * @var array
+	 */
 	protected $arguments;
 
+	/**
+	 * UserInput constructor.
+	 *
+	 * @param string $function
+	 * @param array $arguments
+	 */
 	public function __construct(string $function, array $arguments = [])
 	{
 		$function = trim($function);
@@ -54,6 +67,14 @@ class UserInput
 		return $this->getFunction() . implode(',', $this->getArguments());
 	}
 
+	/**
+	 * Sanitizes array of argument strings.
+	 *
+	 * Simply trims each for time being.
+	 *
+	 * @param array $arguments
+	 * @return array
+	 */
 	protected function sanitizeArguments(array $arguments): array
 	{
 		return array_map(function(string $argument) {
