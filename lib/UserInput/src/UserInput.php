@@ -9,21 +9,25 @@ class UserInput
 
 	public function __construct(string $function, array $arguments = [])
 	{
-//		$inputParts = explode(' ', trim($inputString));
-
 		$this->function = $function;
 		$this->arguments = $this->sanitizeArguments($arguments);
-//		$this->arguments = array_reduce(explode(',', implode(' ', $inputParts)), function(array $all, string $arg) {
-//
-//			$trimmedArg = trim($arg);
-//
-//			if ($trimmedArg !== '') {
-//				$all[] = $trimmedArg;
-//			}
-//
-//			return $all;
-//
-//		}, []);
+
+	}
+
+	/**
+	 * Factory method to create a new instance from an input string.
+	 *
+	 * @param string $inputString
+	 * @return UserInput
+	 */
+	public static function makeFrom(string $inputString): UserInput
+	{
+		$inputParts = explode(' ', trim($inputString));
+
+		$function = array_shift($inputParts);
+		$arguments = explode(',', implode(' ', $inputParts));
+
+		return new UserInput($function, $arguments);
 	}
 
 	public function getFunction(): string
