@@ -38,6 +38,14 @@ class Robot
 			throw new InvalidInputException('Invalid input: ' . $input->getInputString());
 		}
 
+		if (
+			!$this->isPlacedWithDirection() &&
+			$input->getFunction() !== 'PLACE'
+		) {
+			// ignore all inputs until the robot has been placed on table
+			return null;
+		}
+
 		return call_user_func_array([$this, $input->getFunction()], $input->getArguments());
 	}
 
@@ -106,10 +114,10 @@ class Robot
 
 	// INPUT: QUERIES
 
-	protected function report(): string
+	protected function report(): ?string
 	{
-		if (!$this->isPlaced()) {
-			return 'Unplaced';
+		if (!$this->isPlacedWithDirection()) {
+			return null;
 		}
 
 		return implode(',', [
@@ -141,9 +149,9 @@ class Robot
 		$this->direction = $direction;
 	}
 
-	public function isPlaced(): bool
+	public function isPlacedWithDirection(): bool
 	{
-		return $this->table->getPosition() ? true : false;
+		return $this->table->getPosition() && $this->getDirection();
 	}
 
 	protected function turnOnce(int $direction): void

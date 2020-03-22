@@ -3,6 +3,7 @@
 namespace ToyRobot;
 
 use ToyRobot\Models\Robot;
+use UserInput\UserInput;
 
 
 class RobotController
@@ -29,7 +30,7 @@ class RobotController
 		while (true) {
 
 			$input = fgets(STDIN);
-			$response = $this->robot->input($input);
+			$response = $this->robot->input(UserInput::makeFrom($input));
 
 			if (!is_null($response)) {
 				echo $response;
