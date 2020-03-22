@@ -40,6 +40,16 @@ class UserInput
 		return $this->arguments;
 	}
 
+	/**
+	 * Returns the input as string with function and arguments.
+	 *
+	 * @return string
+	 */
+	public function getInputString(): string
+	{
+		return $this->getFunction() . implode(',', $this->getArguments());
+	}
+
 	protected function sanitizeArguments(array $arguments): array
 	{
 		return array_map(function(string $argument) {
