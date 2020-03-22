@@ -9,6 +9,18 @@ class RobotTest extends TestCase
 	/**
 	 * @test
 	 */
+	public function cannot_set_invalid_direction(): void
+	{
+		$this->expectException(\DomainException::class);
+		$this->expectExceptionMessage('Direction must either be "NORTH", "SOUTH", "EAST" or "WEST"');
+
+		$robot = new Robot();
+		$robot->setDirection('asdf');
+	}
+
+	/**
+	 * @test
+	 */
 	public function cannot_turn_robot_left_without_direction(): void
 	{
 		$this->expectException(\DomainException::class);
@@ -18,6 +30,20 @@ class RobotTest extends TestCase
 		$this->assertNull($robot->getDirection());
 
 		$robot->left();
+	}
+
+	/**
+	 * @test
+	 */
+	public function cannot_turn_robot_right_without_direction(): void
+	{
+		$this->expectException(\DomainException::class);
+		$this->expectExceptionMessage('Cannot turn robot without direction');
+
+		$robot = new Robot();
+		$this->assertNull($robot->getDirection());
+
+		$robot->right();
 	}
 
 	/**
@@ -52,20 +78,6 @@ class RobotTest extends TestCase
 
 		$robot->right();
 		$this->assertEquals(Robot::DIRECTION_NORTH, $robot->getDirection());
-	}
-
-	/**
-	 * @test
-	 */
-	public function cannot_turn_robot_right_without_direction(): void
-	{
-		$this->expectException(\DomainException::class);
-		$this->expectExceptionMessage('Cannot turn robot without direction');
-
-		$robot = new Robot();
-		$this->assertNull($robot->getDirection());
-
-		$robot->right();
 	}
 
 	/**

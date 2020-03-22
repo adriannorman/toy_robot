@@ -146,6 +146,18 @@ class Robot
 
 	public function setDirection(string $direction): void
 	{
+		if (!in_array(
+			$direction,
+			[
+				self::DIRECTION_NORTH,
+				self::DIRECTION_SOUTH,
+				self::DIRECTION_WEST,
+				self::DIRECTION_EAST,
+			]
+		)) {
+			throw new \DomainException('Direction must either be "NORTH", "SOUTH", "EAST" or "WEST"');
+		}
+
 		$this->direction = $direction;
 	}
 
