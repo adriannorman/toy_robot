@@ -14,6 +14,20 @@ use ToyRobot\Exceptions\TablePositionException;
 class Table
 {
 	/**
+	 * The implied entity's current x coordinate.
+	 *
+	 * @var int
+	 */
+	protected $current_x;
+
+	/**
+	 * The implied entity's current y coordinate.
+	 *
+	 * @var int
+	 */
+	protected $current_y;
+
+	/**
 	 * @var int
 	 */
 	protected $max_x;
