@@ -60,6 +60,6 @@ class RobotInputTest extends TestCase
 		$robot->input('PLACE 3,2,EAST');
 		$report = $robot->input('REPORT');
 
-		$this->assertEquals('3,2,EAST', $report);
+		$this->assertEquals('3,2,EAST' . PHP_EOL, $report);
 	}
 }
