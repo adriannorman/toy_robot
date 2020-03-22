@@ -3,9 +3,10 @@
 namespace ToyRobot\Models;
 
 use ToyRobot\Exceptions\InvalidInputException;
+use UserInput\AcceptsInput;
 use UserInput\UserInput;
 
-class Robot
+class Robot implements AcceptsInput
 {
 	PUBLIC CONST DIRECTION_NORTH = 'NORTH';
 	PUBLIC CONST DIRECTION_SOUTH = 'SOUTH';
@@ -32,6 +33,15 @@ class Robot
 		$this->table = new Table(4, 4);
 	}
 
+	/**
+	 * Responds to client input.
+	 *
+	 * Responsible for interfacing with the outside world.
+	 * Commands return null, queries return strings.
+	 *
+	 * @param UserInput $input
+	 * @return string|null
+	 */
 	public function input(UserInput $input): ?string
 	{
 		if (!$this->isValidInputFunction($input)) {
