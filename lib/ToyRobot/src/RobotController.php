@@ -2,6 +2,7 @@
 
 namespace ToyRobot;
 
+use ToyRobot\Exceptions\InvalidInputException;
 use ToyRobot\Models\Robot;
 use UserInput\UserInput;
 
@@ -30,7 +31,18 @@ class RobotController
 		while (true) {
 
 			$input = fgets(STDIN);
-			$response = $this->robot->input(UserInput::makeFrom($input));
+
+			try {
+
+				$response = $this->robot->input(UserInput::makeFrom($input));
+
+			} catch (InvalidInputException $e) {
+
+				// application requires ignoring inputs (valid or invalid) until a valid 'PLACE' command.
+				// logic/catch for this goes here as the model should still error on invalid command.
+
+				$response = null;
+			}
 
 			if (!is_null($response)) {
 				echo $response;
