@@ -1,6 +1,6 @@
 <?php
 
-namespace ToyRobot;
+namespace ToyRobot\Models;
 
 use ToyRobot\Exceptions\TablePositionException;
 

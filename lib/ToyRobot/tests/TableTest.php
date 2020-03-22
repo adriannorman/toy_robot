@@ -1,7 +1,7 @@
 <?php
 
 use ToyRobot\Exceptions\TablePositionException;
-use ToyRobot\Table;
+use ToyRobot\Models\Table;
 
 class TableTest extends PHPUnit\Framework\TestCase
 {

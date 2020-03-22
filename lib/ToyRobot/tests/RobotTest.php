@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-use ToyRobot\Robot;
+use ToyRobot\Models\Robot;
 
 class RobotTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 require_once('./vendor/autoload.php');
 
-use ToyRobot\Robot;
+use ToyRobot\Models\Robot;
 use ToyRobot\RobotController;
 
 echo 'Welcome to Toy Robot' . PHP_EOL;

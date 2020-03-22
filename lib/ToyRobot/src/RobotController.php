@@ -2,6 +2,8 @@
 
 namespace ToyRobot;
 
+use ToyRobot\Models\Robot;
+
 
 class RobotController
 {

@@ -1,8 +1,9 @@
 <?php
 
-namespace ToyRobot;
+namespace ToyRobot\Models;
 
 use ToyRobot\Exceptions\InvalidInputException;
+use ToyRobot\UserInput;
 
 class Robot
 {
