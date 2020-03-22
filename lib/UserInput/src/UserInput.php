@@ -9,9 +9,13 @@ class UserInput
 
 	public function __construct(string $function, array $arguments = [])
 	{
+		$function = trim($function);
+		if ($function === '') {
+			throw new \DomainException('Cannot use empty string as function');
+		}
+
 		$this->function = $function;
 		$this->arguments = $this->sanitizeArguments($arguments);
-
 	}
 
 	/**

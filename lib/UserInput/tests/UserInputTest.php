@@ -19,6 +19,17 @@ class UserInputTest extends TestCase
 	/**
 	 * @test
 	 */
+	public function cannot_construct_with_empty_function(): void
+	{
+		$this->expectException(\DomainException::class);
+		$this->expectExceptionMessage('Cannot use empty string as function');
+
+		$input = new UserInput('');
+	}
+
+	/**
+	 * @test
+	 */
 	public function can_make_from_input_string(): void
 	{
 		$input = UserInput::makeFrom('function arg_1,arg_2');
