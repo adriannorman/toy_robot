@@ -1,7 +1,8 @@
 {
     "autoload": {
         "psr-4": {
-          "ToyRobot\\": "lib/ToyRobot/src"
+          "ToyRobot\\": "lib/ToyRobot/src",
+          "UserInput\\": "lib/UserInput/src"
         }
     },
     "require-dev": {
