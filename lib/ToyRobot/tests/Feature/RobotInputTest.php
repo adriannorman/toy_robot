@@ -45,10 +45,28 @@ class RobotInputTest extends TestCase
 	/**
 	 * @test
 	 */
-	public function unplaced_robot_reports_unplaced(): void
+	public function unplaced_robot_reports_null(): void
 	{
 		$robot = new Robot();
-		$this->assertEquals('Unplaced', $robot->input(UserInput::makeFrom('REPORT')));
+
+		$response = $robot->input(UserInput::makeFrom('REPORT'));
+
+		$this->assertNull($response);
+	}
+
+	/**
+	 * @test
+	 */
+	public function unplaced_robot_reports_null_after_valid_input(): void
+	{
+		$robot = new Robot();
+
+		$robot->input(UserInput::makeFrom('MOVE'));
+		$robot->input(UserInput::makeFrom('LEFT'));
+
+		$response = $robot->input(UserInput::makeFrom('REPORT'));
+
+		$this->assertNull($response);
 	}
 
 	/**
