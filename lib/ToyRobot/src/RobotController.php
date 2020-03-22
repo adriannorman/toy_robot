@@ -6,7 +6,13 @@ use ToyRobot\Exceptions\InvalidInputException;
 use ToyRobot\Models\Robot;
 use UserInput\UserInput;
 
-
+/**
+ * Class RobotController
+ *
+ * Provides client interface (via command line) for interacting with the domain.
+ *
+ * @package ToyRobot
+ */
 class RobotController
 {
 	/**
@@ -28,8 +34,11 @@ class RobotController
 	 */
 	public function listen()
 	{
+		// while (true) serves to constantly listen for user input
+
 		while (true) {
 
+			// halts the loop until after capturing client input
 			$input = fgets(STDIN);
 
 			try {
@@ -43,6 +52,8 @@ class RobotController
 
 				$response = null;
 			}
+
+			// print response to client
 
 			if (!is_null($response)) {
 				echo $response;

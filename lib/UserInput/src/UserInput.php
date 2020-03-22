@@ -2,6 +2,13 @@
 
 namespace UserInput;
 
+/**
+ * Class UserInput
+ *
+ * DTO for client input. Consists of a function and its arguments.
+ *
+ * @package UserInput
+ */
 class UserInput
 {
 	/**
