@@ -3,7 +3,7 @@
 namespace ToyRobot\Models;
 
 use ToyRobot\Exceptions\InvalidInputException;
-use ToyRobot\UserInput;
+use UserInput\UserInput;
 
 class Robot
 {
@@ -32,15 +32,13 @@ class Robot
 		$this->table = new Table(4, 4);
 	}
 
-	public function input(string $input): ?string
+	public function input(UserInput $input): ?string
 	{
-		$userInput = new UserInput($input);
-
-		if (!$this->isValidInputFunction($userInput)) {
-			throw new InvalidInputException('Invalid input: ' . $input);
+		if (!$this->isValidInputFunction($input)) {
+			throw new InvalidInputException('Invalid input: ' . $input->getInputString());
 		}
 
-		return call_user_func_array([$this, $userInput->getFunction()], $userInput->getArguments());
+		return call_user_func_array([$this, $input->getFunction()], $input->getArguments());
 	}
 
 	private function getValidInputs(): array

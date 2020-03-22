@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 use ToyRobot\Models\Robot;
 use ToyRobot\Exceptions\InvalidInputException;
+use UserInput\UserInput;
 
 class RobotInputTest extends TestCase
 {
@@ -15,7 +16,7 @@ class RobotInputTest extends TestCase
 		$this->expectException(InvalidInputException::class);
 
 		$robot = new Robot();
-		$robot->input('asfjkahgsdfkasdf');
+		$robot->input(UserInput::makeFrom('asfjkahgsdfkasdf'));
 	}
 
 	/**
@@ -37,7 +38,7 @@ class RobotInputTest extends TestCase
 
 			// expecting either null response for commands or strings for queries
 
-			$this->assertIsString($robot->input($input) ?? '');
+			$this->assertIsString($robot->input(UserInput::makeFrom($input)) ?? '');
 		}
 	}
 
@@ -47,7 +48,7 @@ class RobotInputTest extends TestCase
 	public function unplaced_robot_reports_unplaced(): void
 	{
 		$robot = new Robot();
-		$this->assertEquals('Unplaced', $robot->input('REPORT'));
+		$this->assertEquals('Unplaced', $robot->input(UserInput::makeFrom('REPORT')));
 	}
 
 	/**
@@ -57,8 +58,8 @@ class RobotInputTest extends TestCase
 	{
 		$robot = new Robot();
 
-		$robot->input('PLACE 3,2,EAST');
-		$report = $robot->input('REPORT');
+		$robot->input(UserInput::makeFrom('PLACE 3,2,EAST'));
+		$report = $robot->input(UserInput::makeFrom('REPORT'));
 
 		$this->assertEquals('3,2,EAST' . PHP_EOL, $report);
 	}

@@ -1,6 +1,6 @@
 <?php
 
-namespace ToyRobot;
+namespace UserInput;
 
 class UserInput
 {
