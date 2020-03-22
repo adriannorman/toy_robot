@@ -46,7 +46,16 @@ class Robot
 			return null;
 		}
 
-		return call_user_func_array([$this, $input->getFunction()], $input->getArguments());
+		try {
+
+			return call_user_func_array([$this, $input->getFunction()], $input->getArguments());
+
+		} catch (\DomainException $e) {
+
+			// treat business rule errors as invalid input errors if rules are broken due to user input
+
+			throw new InvalidInputException('Invalid input: ' . $e->getMessage());
+		}
 	}
 
 	private function getValidInputs(): array
